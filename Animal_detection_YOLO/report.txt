@@ -1,0 +1,26 @@
+## Cách YOLO hoạt động:
+1. Chia ảnh thành các lưới N x N
+	Mỗi ô sẽ dự đoán tìm tâm của đối tượng trong lưới đó
+2. Dự đoán bounding boxes và classes
+	Mỗi 1 bounding box gồm tọa độ tâm của bounding box (x_center, y_center)
+	Kích thước của bounding box (w, h) so với toàn bộ ảnh
+	Độ tin cậy
+	Class
+3. Dự đoán
+	Kết hợp kết quả từ tất cả các ô lưới để tạo bounding box cuối cùng
+	Sử dụng Non-Maximum Suppression(NMS) để loại bỏ các bounding box trùng nhau hoặc độ tin cậy thấo
+4. Hàm thất thoát
+	- Loss tọa độ bounding box (MSE)
+	- Loss cho độ tin cậy (cross-entropy)
+	- Loss cho class (cross-entropy)
+
+
+
+## Cấu trúc tổng quát của YOLO:
+Là 1 mô hình CNN được thiết kế để phát hiện đối tượng và phân loại
+Gồm có 3 phần chính: 
+	- Backbone: chứa mạng CNN để trích xuất các đặc trưng
+	- Neck: phần giữa, sử dụng các kĩ thuật như FPN để kết hợp đặc trưng từ các tầng khác nhau
+	- Head: Phần dự đoán cuối cùng, bao gồm các lớp tích chập để dự đoán bounding box, độ tin cậy và class
+
+
